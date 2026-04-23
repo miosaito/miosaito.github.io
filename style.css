@@ -1,40 +1,105 @@
-/* ===== RESET ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* ===== RESET & BASE ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* ===== BODY ===== */
 body {
   font-family: Arial, sans-serif;
-  line-height: 1.6;
-  background: #ffffff;
+  line-height: 1.8;
+  background: #f4f7f8;
   color: #333;
 }
 
-/* ===== NAVBAR ===== */
+/* ===== HEADER ===== */
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 40px;
-  background: black;
-  color: white;
+  /* 背景色は各ページのクラスで上書きします */
+  color: #fff;
+  padding: 60px 20px;
+  text-align: center;
 }
 
-nav a {
-  color: white;
-  margin-left: 20px;
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* ===== CONTAINER (本文の枠) ===== */
+.container {
+  max-width: 1000px; /* 横幅を少し広げました (800px -> 1000px) */
+  margin: -40px auto 60px; /* ヘッダーに少し重ねる */
+  background: #fff;
+  padding: 50px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.container img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+/* ===== HEADINGS ===== */
+h2 {
+  font-size: 1.8rem;
+  border-left: 5px solid; /* 色は各ページで指定 */
+  padding-left: 15px;
+  margin: 40px 0 20px;
+}
+
+/* ===== BUTTON ===== */
+.back-link {
+  display: inline-block;
+  margin-top: 40px;
+  padding: 12px 30px;
   text-decoration: none;
-  font-size: 14px;
+  border: 2px solid;
+  border-radius: 50px;
+  font-weight: bold;
+  transition: 0.3s;
 }
 
-nav a:hover {
-  opacity: 0.7;
+/* ===== FOOTER ===== */
+footer {
+  background: #222;
+  color: #fff;
+  text-align: center;
+  padding: 30px;
 }
 
-/* ===== HERO ===== */
+/* =============================================
+   各プロジェクトのカラー設定 (テーマカラー)
+   ============================================= */
+
+/* Project 1 & 3: Teal (青緑) */
+.theme-teal header { background: #005f73; }
+.theme-teal h2 { color: #005f73; border-color: #0a9396; }
+.theme-teal .back-link { color: #005f73; border-color: #005f73; }
+.theme-teal .back-link:hover { background: #005f73; color: #fff; }
+
+/* Project 2: Red (赤) */
+.theme-red header { background: #8b0000; }
+.theme-red h2 { color: #8b0000; border-color: #ff4d4d; }
+.theme-red .back-link { color: #8b0000; border-color: #8b0000; }
+.theme-red .back-link:hover { background: #8b0000; color: #fff; }/* ===== HERO ===== */
+
+.theme-yellow header { background: #d8b529; }
+.theme-yellow h2 { color: #d8b529; border-color: #ff9900; }
+.theme-yellow .back-link { color: #d8b529; border-color: #d8b529; }
+.theme-yellow .back-link:hover { background: #d8b529; color: #fff; }
+
+/* style.css に追加 */
+.container video {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    display: block; /* 下に余計な隙間ができるのを防ぐ */
+}
+
 .hero {
   height: 90vh;
   background: url("images/profile1.jpg") center/cover no-repeat;
@@ -43,6 +108,8 @@ nav a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  padding: 60px 0;
 }
 
 .hero h1 {
@@ -60,8 +127,52 @@ nav a:hover {
   text-align: center;
 }
 
-.section h2 {
-  margin-bottom: 20px;
+/* 全体の見出しルールを統一 */
+h1 { text-align: center; margin-bottom: 20px; }
+h2 { margin-top: 40px; margin-bottom: 20px; }
+h3 { margin-top: 20px; }
+p { margin-top: 10px; }
+
+
+/* プロフィールカードの設定 */
+.profile-card {
+    background-color: #f8f9fa; 
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 60px 40px;
+    /* 【重要】上側に 80px の余白を作り、左右は auto で中央寄せに */
+    margin: 80px auto 60px auto !important;
+    max-width: 800px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    text-align: center; /* 中身（見出し・ボタン）を中央に */
+}
+
+/* プロフィール内の見出し */
+.profile-card h2 {
+    margin-top: 0;
+    color: #333;
+    border-bottom: 2px solid #007bff; /* タイトルの下にアクセントの線 */
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* ボタンのデザイン */
+.btn-profile {
+    display: inline-block;
+    padding: 10px 25px;
+    background-color: #416fa0; /* ボタンの背景色（青） */
+    color: #ffffff;            /* 文字色（白） */
+    text-decoration: none;     /* 下線を消す */
+    border-radius: 5px;        /* 角の丸み */
+    font-weight: bold;
+    transition: background-color 0.3s ease; /* ホバー時のアニメーション */
+    margin-top: 15px;
+}
+
+/* ボタンにマウスを乗せた時（ホバー） */
+.btn-profile:hover {
+    background-color: #0056b3; /* 少し濃い青に変化 */
+    color: #ffffff;
 }
 
 /* ===== PROJECTS GRID ===== */
@@ -104,49 +215,8 @@ nav a:hover {
   color: #555;
 }
 
-/* ===== DETAIL PAGE ===== */
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 60px 20px;
-  text-align: left;
-}
 
-.container img {
-  width: 100%;
-  border-radius: 10px;
-  margin: 30px 0;
-}
 
-/* ===== HEADINGS ===== */
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-h2 {
-  margin-top: 40px;
-}
-
-h3 {
-  margin-top: 20px;
-}
-
-/* ===== PARAGRAPH ===== */
-p {
-  margin-top: 10px;
-}
-
-/* ===== LIST ===== */
-ul {
-  margin-top: 10px;
-  padding-left: 20px;
-}
-
-/* ===== LINK (BACK BUTTON) ===== */
-a {
-  color: blue;
-}
 
 .container a {
   display: inline-block;
@@ -154,10 +224,113 @@ a {
   text-decoration: none;
 }
 
-/* ===== FOOTER ===== */
-footer {
-  background: black;
-  color: white;
-  text-align: center;
+/* タイムライン全体のコンテナ */
+.timeline-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+  text-align: left; /* 親要素がcenterでもここは左揃え */
+}
+
+.timeline {
+  position: relative;
+  list-style: none;
+  padding: 0;
+}
+
+/* 縦線 */
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 20px;
+  width: 4px;
+  background: #e0e0e0;
+  z-index: 1;
+}
+
+/* 各アイテムの並び */
+.timeline-item {
+  position: relative;
+  margin-bottom: 40px;
+  padding-left: 60px;
+}
+
+/* 青い丸（ノード） */
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #3498db; /* お好みのテーマカラーに変更可能 */
+  border: 4px solid #fff;
+  z-index: 2;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* 日付部分 */
+.timeline-date {
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+/* 白いボックス（吹き出し） */
+.timeline-content {
+  position: relative;
   padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  border: 1px solid #eee;
+}
+
+/* ボックス横の小さな矢印 */
+.timeline-content::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: -10px;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid #fff;
+}
+
+.timeline-content h3 {
+  margin: 0 0 10px 0;
+  color: #3498db;
+  font-size: 1.1rem;
+}
+
+.timeline-content p {
+  margin: 0 0 10px 0;
+  line-height: 1.6;
+}
+
+.timeline-content p:last-child {
+  margin-bottom: 0;
+}
+
+.left_dod {
+  text-align: left;
+}
+
+.left_dod ul {
+  padding: 0;
+  margin: 0;
+  list-style-position: inside;
+  text-align: left;
+}
+
+.left_dod li {
+  padding-left: 0; 
+  margin-bottom: 10px;
+  list-style-type: disc; /* 黒丸 */
 }
