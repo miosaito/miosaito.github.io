@@ -91,7 +91,7 @@ body {
 #spawn-btn:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
 #btn-fill {
     position: absolute; top: 50%; left: 50%; width: 100%; height: 100%;
-    background-color: #ffb300; border-radius: 50%; transform: translate(-50%, -50%) scale(0); 
+    background-color: #f3d07e; border-radius: 50%; transform: translate(-50%, -50%) scale(0); 
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: none; 
 }
 
@@ -116,3 +116,63 @@ body {
     border-width: 8px; border-style: solid; border-color: rgba(255, 255, 255, 0.95) transparent transparent transparent;
 }
 .photo-card.active .bubble { transform: translateX(-50%) scale(1); opacity: 1; }
+
+/* ===== 📸 中央のTapボタン専用デザイン (修正版) ===== */
+#spawn-btn {
+    width: 110px; /* 🌟以前提示した大きさ。もし異なる場合は調整してください */
+    height: 110px;
+    padding: 0;
+    border-radius: 50%; /* 円形 */
+    background: rgba(255, 255, 255, 0.15); /* 半透明の白 */
+    border: 5px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px); /* すりガラス効果 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    /* 🌟 transitionを調整（円形の膨らみとactive時の動き） */
+    transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.3s ease; 
+}
+
+/* 🌟 ホバー時に円形全体が少し膨らむアニメーション
+   （既存のホバー時のtranslateX変更を打ち消し、scaleで膨らませる） */
+#spawn-btn:hover {
+    /* 배치維持のために translateX(-50%) は固定。既存のtranslateYなどを打ち消し、scaleで膨らませる。 */
+    transform: translateX(-50%) translateY(0) scale(1.05); /* 円形全体が少し膨らむ */
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.3); /* 影も少し広げる */
+    background: rgba(255, 255, 255, 0.2); /* 少し白く */
+}
+
+/* 🌟 ボタンを押した時の沈み込みアクション（前回の0.92は少し小さいため、以前提示した0.9に。 translateX(-50%) が必要） */
+#spawn-btn:active {
+    transform: translateX(-50%) scale(0.9); 
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== 「Tap」の文字のデザイン (修正版：絶対に薄くならない) ===== */
+.spawn-text {
+    position: relative;
+    z-index: 10;
+    color: #002868 !important; /* 🌟 !importantで色を強制的に固定 */
+    opacity: 1 !important;     /* 🌟 透明になるのを完全に防ぐ */
+    font-size: 1.9rem; 
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-shadow: 0 2px 6px rgba(255, 255, 255, 0.6); /* 🌟 影を白っぽくして、背景が暗くなっても読みやすく */
+    pointer-events: none;
+}
+
+/* ===== 塗りつぶしの階層調整 (修正版：確実に文字の裏側へ) ===== */
+#btn-fill {
+    position: absolute; /* 🌟 これがないとz-indexが無視されることがあります */
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    z-index: 1; /* 🌟 確実に文字（z-index: 10）より後ろにする */
+    pointer-events: none;
+    /* ※backgroundの色指定が元々あれば、そのまま残して大丈夫です */
+}
