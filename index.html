@@ -6,7 +6,7 @@
   <title>My Portfolio</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    body { font-family: Arial, sans-serif; margin:0; }
+    body { font-family: Arial, sans-serif; margin:0; overflow: auto !important; }
     header { background:#0a4f6d; color:#fff; display:flex; justify-content:space-between; align-items:center; padding:15px; background:#0a4f6d; color:#fff; }
     nav a { margin-left:15px; color:#fff; text-decoration:none; }
     .section { padding:40px 30px; max-width:900px; margin:auto; }
@@ -21,6 +21,7 @@
   </style>
 </head>
 <body>
+  
 
 <!-- NAVBAR -->
 <header>
@@ -28,6 +29,7 @@
   <nav>
     <a href="#about">Profile</a>
     <a href="#projects">Projects</a>
+    <a href="#travel">Travel</a>
     <a href="#contact">Contact</a>
   </nav>
 </header>
@@ -40,12 +42,12 @@
 
 <!-- PROFILE -->
 
-<section id="about" class="section profile-card">
+<section id="about" class="section profile-card"> 
   <h2>Profile</h2>
   <p>
-  I am a passionate Electrical and Computer Science Engineer student with a keen interest in technology and innovation.<br>
+  I am a passionate Electrical and Computer Science Engineer student with a keen interest in technology and innovation.
   I have been participating in various projects so far, and I have developed leadership skills as a team leader as well as the ability to think of new business ideas. Going forward, I will continue to focus on my studies and explore new opportunities in the field.<br>
-  I will become an engineer who can work globally and contribute internationally. 
+  My future dream is to become an engineer who can work globally and contribute internationally. 
   </p>
 
 <a href="profile.html" class="btn-profile"> View Full Profile</a>
@@ -77,10 +79,24 @@
 
 </section>
 
+<section id="travel" class="section">
+    <h2>Travel</h2>
+    <p>地球儀をタップして旅の記録を見る</p>
+    <div id="globeViz"></div>
+</section>
+
+<script src="//unpkg.com/globe.gl"></script>
+<script src="travel.js"></script>
+
+
 <!-- CONTACT -->
 <section id="contact" class="section">
   <h2>Contact</h2>
   <p>Email: e2217@s.akashi.ac.jp</p>
+  <div class="sns-links">
+    <a href="https://www.facebook.com/profile.php?id=100078224116276" target="_blank" class="sns-btn">Facebook</a> | 
+    <a href="https://www.linkedin.com/feed/" target="_blank" class="sns-btn">LinkdIn</a>
+  </div>
 </section>
 
 <!-- FOOTER -->
