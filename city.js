@@ -129,13 +129,21 @@ function initCity() {
 
         const screenW = window.innerWidth;
         
-        // 🌟 ランダムに選ばれた gridIndex をもとに場所を計算
-        const row = Math.floor(gridIndex / 5); 
-        const col = gridIndex % 5;             
+        // 写真の配置計算部分
+        const isMobile = window.innerWidth <= 768 || document.body.classList.contains('force-mobile-view');
+        const colCount = isMobile ? 2 : 5; // スマホなら2列、PCなら5列
+
+        const col = i % colCount;
+        const row = Math.floor(i / colCount);
+
+        // 配置の間隔もスマホ用に調整
+        const spacingX = isMobile ? (window.innerWidth - 100) / 2 : 170;
+        const spacingY = isMobile ? 180 : 130;
+
+        const finalX = (isMobile ? 40 : 50) + col * spacingX;
+        const finalY = (isMobile ? 150 : 180) + row * spacingY;              
 
         const centerX = screenW * (0.15 + col * 0.175);
-        const finalX = centerX - 80;
-        const finalY = 250 + (row * 300);
 
         let rotation;
         if (col < 2) {

@@ -508,3 +508,61 @@ p { margin-top: 10px; }
 #contact h2 {
   margin-top: 10px !important; /* Contactタイトルの上の隙間を減らす */
 }
+
+/* =========================================
+   📱 スマホ版・強制表示版のスタイル調整
+   ========================================= */
+@media (max-width: 768px), body.force-mobile-view {
+
+    /* ① ナビゲーションの文字を小さくして1列に */
+    header nav {
+        justify-content: center;
+        width: 100%;
+        gap: 8px; /* 間隔を少し詰める */
+    }
+    header nav a {
+        font-size: 15px !important; /* 25pxの約0.6倍 */
+        margin: 0 5px !important;
+        white-space: nowrap; /* 改行を防ぐ */
+    }
+
+    /* ② Heroセクションの文字調整と写真のずらし */
+    .hero {
+        /* 背景画像を3cm（約113px）分、左にずらす */
+        background-position: calc(50% + 113px) center !important;
+    }
+    .hero h1 {
+        font-size: 2rem !important; /* 見切れないサイズに */
+        width: 90%;
+        margin: 0 auto;
+    }
+    .hero p {
+        font-size: 1rem !important;
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    /* ④ プロジェクト詳細ページ（project1~3）の文字サイズ */
+    /* container内のタイトル、本文、戻るボタン */
+    .container h1 { font-size: 1.8rem !important; }
+    .container h2 { font-size: 1.5rem !important; }
+    .container p, .container li { 
+        font-size: 16px !important; /* Wikipediaの標準的な読みやすさ */
+        line-height: 1.6;
+    }
+    .back-link, .back-home-btn {
+        font-size: 1.2rem !important;
+        padding: 12px 24px !important;
+        display: inline-block;
+        margin-top: 20px;
+    }
+
+    /* ⑤ Travelセクションのボタン */
+    #toggle-map, #back-home {
+        font-size: 1.1rem !important;
+        padding: 10px 15px !important;
+        width: auto !important; /* 円形から少し横長に変更して文字を見やすく */
+        height: auto !important;
+        border-radius: 30px !important;
+    }
+}

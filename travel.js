@@ -41,6 +41,8 @@ if (containerLarge) {
             const el = document.createElement('div');
             // ポイント1: pointer-events を auto にしてクリックを有効化
             el.style.pointerEvents = 'auto'; 
+            const isMobile = window.innerWidth <= 768;
+            const scale = isMobile ? 3 : 1; // スマホなら3倍
             
             el.innerHTML = `
                 <div class="globe-pin" style="cursor: pointer; text-align: center; transition: transform 0.2s;">
