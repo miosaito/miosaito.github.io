@@ -1,34 +1,58 @@
+// ===== view.js 完全版 =====
+
+// viewport取得
 const viewportMeta = document.querySelector('meta[name="viewport"]');
-const savedViewMode = localStorage.getItem('viewMode');
 
-let isMobileView = false;
+// 保存された状態を取得
+let savedViewMode = localStorage.getItem('viewMode');
 
-// 状態判定
-if (savedViewMode === 'mobile') {
-  isMobileView = true;
-} else if (savedViewMode === 'desktop') {
-  isMobileView = false;
-} else {
-  isMobileView = window.innerWidth <= 768;
+// 初期状態（未設定ならmobileにする）
+if (!savedViewMode) {
+  savedViewMode = 'mobile';
+  localStorage.setItem('viewMode', 'mobile');
 }
+
+let isMobileView = savedViewMode === 'mobile';
 
 // 適用関数
 function applyViewMode() {
   if (isMobileView) {
+    // ===== MOBILE =====
     document.body.classList.add('force-mobile-view');
+
     if (viewportMeta) {
-      viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0');
+      viewportMeta.setAttribute(
+        'content',
+        'width=375, initial-scale=1.0'
+      );
     }
+
   } else {
+    // ===== DESKTOP =====
     document.body.classList.remove('force-mobile-view');
+
     if (viewportMeta) {
-      viewportMeta.setAttribute('content', 'width=1024');
+      viewportMeta.setAttribute(
+        'content',
+        'width=device-width, initial-scale=1.0'
+      );
     }
   }
 }
 
-console.log("view.js loaded");
-console.log("saved:", savedViewMode);
+// 切り替え関数（ボタン用）
+function setMobileView() {
+  localStorage.setItem('viewMode', 'mobile');
+  location.reload();
+}
 
-// 実行
+function setDesktopView() {
+  localStorage.setItem('viewMode', 'desktop');
+  location.reload();
+}
+
+// 実行（最重要）
 applyViewMode();
+
+// デバッグ用（確認したい時だけ）
+console.log("view mode:", savedViewMode);

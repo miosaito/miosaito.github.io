@@ -8,6 +8,7 @@ body {
   color: #333;
 }
 
+
 header nav a {
     font-size: 25px;       /* 数値を大きくすると文字が大きくなります */
     font-weight: bold;     /* 太字にするとより強調されます */

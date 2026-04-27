@@ -27,7 +27,7 @@
     .section { padding:40px 30px; max-width:900px; margin:auto; }
     ul { line-height:1.8; }
     .projects { display:flex; gap:20px; flex-wrap:wrap; }
-    .card { width:250px; text-decoration:none; color:#000; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+    .card { width:250px; text-decoration:none; color:white; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
     .card img { width:100%; height:150px; object-fit:cover; }
     .card h3 { margin:10px; }
     .card p { margin:10px; }
@@ -240,66 +240,60 @@
 </footer>
 
 <script>
-  const toggleBtn = document.getElementById('view-toggle-btn');
+const toggleBtn = document.getElementById('view-toggle-btn');
   const viewportMeta = document.getElementById('viewport-meta') || document.querySelector('meta[name="viewport"]');
   
-  // 🌟 1. ローカルストレージから前回の状態（メモ）を読み込む
-  const savedViewMode = localStorage.getItem('viewMode');
-  
-  let isMobileView = false;
+  let isMobileView = window.innerWidth <= 768;
 
-  // 🌟 2. メモがあればそれを優先し、なければ画面幅で判断する
+  // 🌟 初回読み込み時にメモを確認
+  const savedViewMode = localStorage.getItem('viewMode');
   if (savedViewMode === 'mobile') {
     isMobileView = true;
   } else if (savedViewMode === 'desktop') {
     isMobileView = false;
-  } else {
-    isMobileView = window.innerWidth <= 768;
   }
 
-  function setMobileView() {
-  localStorage.setItem('viewMode', 'mobile');
-  location.reload();
-}
-
-function setDesktopView() {
-  localStorage.setItem('viewMode', 'desktop');
-  location.reload();
-}
-
-  // 🌟 3. 画面の表示を切り替える処理をまとめる
-  function applyViewMode() {
+  function updateButtonText() {
     if (isMobileView) {
-      document.body.classList.add('force-mobile-view');
-      if (viewportMeta) viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0');
+      toggleBtn.textContent = "View Desktop Version";
     } else {
+      toggleBtn.textContent = "View Mobile Version";
+    }
+  }
+
+  updateButtonText();
+
+  // 🌟 ボタンを押した時の処理
+  toggleBtn.addEventListener('click', () => {
+    if (isMobileView) {
+      // スマホ → PC
       document.body.classList.remove('force-mobile-view');
-      if (viewportMeta) viewportMeta.setAttribute('content', 'width=1024');
+      if (viewportMeta) viewportMeta.setAttribute('content', 'width=1024'); 
+      isMobileView = false;
+    } else {
+      // PC → スマホ
+      document.body.classList.add('force-mobile-view');
+      if (viewportMeta) viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0'); 
+      isMobileView = true;
     }
     
-    if (toggleBtn) {
-      toggleBtn.textContent = isMobileView ? "View Desktop Version" : "View Mobile Version";
-    }
+    // 🔥【重要】ここで「スマホ版にした」というメモを保存する！
+    localStorage.setItem('viewMode', isMobileView ? 'mobile' : 'desktop');
     
-    // ウィンドウのリサイズイベントを発火させてGlobe(地球儀)のサイズを再計算させる
     window.dispatchEvent(new Event('resize'));
-  }
+    updateButtonText();
+  });
 
-  // 🌟 4. ページ読み込み時に1回実行して状態を反映
-  applyViewMode();
-
-  // 🌟 5. ボタンが押されたときの処理
-  if (toggleBtn) {
-    toggleBtn.addEventListener('click', () => {
-      isMobileView = !isMobileView; // 状態を反転
-      
-      // ローカルストレージに新しい状態を保存
-      localStorage.setItem('viewMode', isMobileView ? 'mobile' : 'desktop');
-      
-      applyViewMode(); // 画面に反映
-    });
-  }
-</script>
+  window.addEventListener('resize', () => {
+    if (!document.body.classList.contains('force-mobile-view')) {
+      const currentIsMobile = window.innerWidth <= 768;
+      if (isMobileView !== currentIsMobile) {
+        isMobileView = currentIsMobile;
+        updateButtonText();
+      }
+    }
+  });
+  </script>
 
 </body>
 </html>
