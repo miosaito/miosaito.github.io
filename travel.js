@@ -44,6 +44,11 @@ if (containerLarge) {
             const isMobile = window.innerWidth <= 768;
             const scale = isMobile ? 3 : 1; // スマホなら3倍
             
+            // 🌟 サイズを計算（通常時の3倍）
+            const pinSize = isMobile ? 90 : 30;   // 📍のサイズ
+            const fontSize = isMobile ? 42 : 14;  // 都市名のサイズ
+            const marginSize = isMobile ? -15 : -5; // 重なり調整
+
             el.innerHTML = `
                 <div class="globe-pin" style="cursor: pointer; text-align: center; transition: transform 0.2s;">
                     <div style="font-size: 30px;">📍</div>

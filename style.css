@@ -151,6 +151,38 @@ footer {
     margin: 0 auto;
 }
 
+/* style.css の後半、モバイル用設定を以下のように更新 */
+
+/* =========================================
+   📱 スマホ版 & 強制表示モード 共通スタイル
+   ========================================= */
+
+/* 1. 実際のスマホ (画面幅768px以下) 用 */
+@media (max-width: 768px) {
+    .back-home-btn { font-size: 2.2rem !important; padding: 25px 40px !important; border-radius: 60px !important; bottom: 40px; left: 40px; }
+    .map-toggle-btn { font-size: 1.8rem !important; width: 200px !important; height: 200px !important; bottom: 40px; right: 40px; line-height: 1.2; }
+}
+
+/* 2. PCでの「スマホ版を表示」ボタン押下時用 */
+.force-mobile-view .back-home-btn {
+    font-size: 2.2rem !important; /* 約2倍 */
+    padding: 25px 40px !important;
+    border-radius: 60px !important;
+    bottom: 40px !important;
+    left: 40px !important;
+    position: fixed;
+}
+
+.force-mobile-view .map-toggle-btn {
+    font-size: 1.8rem !important; /* 約2倍 */
+    width: 200px !important;
+    height: 200px !important;
+    bottom: 40px !important;
+    right: 40px !important;
+    line-height: 1.2;
+    position: fixed;
+}
+
 /* 📱 Mobile */
 @media (max-width: 768px) {
     .hero {
