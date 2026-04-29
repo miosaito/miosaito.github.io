@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Okinawa Memories - Mobile View</title>
-    <link rel="stylesheet" href="style.css"> <link rel="stylesheet" href="mobile-city.css"> </head>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="city.css">
+    <link rel="stylesheet" href="mobile-city.css"> </head>
 <body class="theme-okinawa">
 
     <div id="mobile-container">
@@ -42,40 +44,49 @@
             { imgSrc: 'images/Okinawa/tacosu.jpg', text: 'Delicious Tacosu a local specialty!' }
         ];
 
-    const track = document.getElementById('image-track');
-    const dotsContainer = document.getElementById('dots-container');
-    const scrollWrapper = document.getElementById('scroll-wrapper');
-    const caption = document.getElementById('caption');
+const track = document.getElementById('image-track');
+const dotsContainer = document.getElementById('dots-container');
+const scrollWrapper = document.getElementById('scroll-wrapper');
+const caption = document.getElementById('caption');
+caption.textContent = memories[0].text;
 
-    // コンテンツ生成
-    memories.forEach((m, index) => {
-        const item = document.createElement('div');
-        item.className = 'memory-item';
-        item.innerHTML = `<img src="${m.imgSrc}">`;
-        track.appendChild(item);
+/* ===== 生成 ===== */
+memories.forEach((m, index) => {
+  const item = document.createElement('div');
+  item.className = 'memory-item';
+  item.innerHTML = `
+    <img src="${m.imgSrc}">`;
+  track.appendChild(item);
 
-        const dot = document.createElement('div');
-        dot.className = 'dot' + (index === 0 ? ' active' : '');
-        dotsContainer.appendChild(dot);
-    });
+  const dot = document.createElement('div');
+  dot.className = 'dot' + (index === 0 ? ' active' : '');
+  dotsContainer.appendChild(dot);
+});
 
-    caption.textContent = memories[0].text;
+const items = document.querySelectorAll('.memory-item');
 
-    // スクロールイベント
-    scrollWrapper.addEventListener('scroll', () => {
-        const scrollLeft = scrollWrapper.scrollLeft;
-        const itemWidth = 295 + 20; // memory-itemのflex-basis + margin
-        const index = Math.round(scrollLeft / itemWidth);
+scrollWrapper.addEventListener('scroll', () => {
+  let closestIndex = 0;
+  let closestDistance = Infinity;
 
-        if (memories[index]) {
-            // キャプション更新
-            caption.textContent = memories[index].text;
-            // ドット更新
-            document.querySelectorAll('.dot').forEach((dot, i) => {
-                dot.classList.toggle('active', i === index);
-            });
-        }
-    });
+  items.forEach((item, i) => {
+    const rect = item.getBoundingClientRect();
+    const center = window.innerWidth / 2;
+    const itemCenter = rect.left + rect.width / 2;
+    const distance = Math.abs(center - itemCenter);
+
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      closestIndex = i;
+    }
+  });
+
+  document.querySelectorAll('.dot').forEach((dot, i) => {
+    dot.classList.toggle('active', i === closestIndex);
+  });
+  caption.textContent = memories[closestIndex].text;
+});
 </script>
+
 </body>
 </html>

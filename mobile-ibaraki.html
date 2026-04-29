@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ibaraki Memories - Mobile View</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="city.css">
+    <link rel="stylesheet" href="mobile-city.css"> </head>
+<body class="theme-ibaraki">
+
+    <div id="mobile-container">
+        <header class="page-header">
+            <h1>Ibaraki Memories</h1>
+            <p>Swipe to see more</p>
+        </header>
+
+        <div class="scroll-wrapper" id="scroll-wrapper">
+            <div class="image-track" id="image-track">
+                </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; align-items: center; padding-bottom: 80px;">
+            <div id="caption">Loading...</div>
+            <div class="indicator-container" id="dots-container"></div>
+        </div>
+
+        <button id="back-map-btn" onclick="location.href='travel-mobile.html'">
+            ← Back to Map
+        </button>
+    </div>
+
+<script>
+        const memories = [
+            { imgSrc: 'images/Ibaraki/Katsudon.jpg', text: 'Authentic Katsudon a local delicacy!' },
+            { imgSrc: 'images/Ibaraki/barbecue.jpg', text: 'Pulling cart to prepare for a BBQ!' },
+            { imgSrc: 'images/Ibaraki/embankment.jpg', text: 'Walking along the riverembankment!' },
+            { imgSrc: 'images/Ibaraki/sunset.jpg', text: 'Beautiful sunset over the Ibaraki countryside!' },
+            { imgSrc: 'images/Ibaraki/seasideshirine.jpg', text: 'Shrine crowded with worshippers!' },
+            { imgSrc: 'images/Ibaraki/hanimarutower.jpg', text: 'The towering giant of Hanimal Tower!' },
+            { imgSrc: 'images/Ibaraki/Onsen.jpg', text: 'Post-Onsen Coffee Milk the best!' },
+            { imgSrc: 'images/Ibaraki/seasidepark.jpg', text: 'Hitachi Seaside Park!' },
+            { imgSrc: 'images/Ibaraki/spicycodroe.jpg', text: 'Spicy Cod Roe museum called mentai-park!' },
+            { imgSrc: 'images/Ibaraki/cherryblossoms.jpg', text: 'Cherry blossoms at Kairakuen!' },
+        ];
+
+const track = document.getElementById('image-track');
+const dotsContainer = document.getElementById('dots-container');
+const scrollWrapper = document.getElementById('scroll-wrapper');
+const caption = document.getElementById('caption');
+caption.textContent = memories[0].text;
+
+/* ===== 生成 ===== */
+memories.forEach((m, index) => {
+  const item = document.createElement('div');
+  item.className = 'memory-item';
+  item.innerHTML = `
+    <img src="${m.imgSrc}">`;
+  track.appendChild(item);
+
+  const dot = document.createElement('div');
+  dot.className = 'dot' + (index === 0 ? ' active' : '');
+  dotsContainer.appendChild(dot);
+});
+
+const items = document.querySelectorAll('.memory-item');
+
+scrollWrapper.addEventListener('scroll', () => {
+  let closestIndex = 0;
+  let closestDistance = Infinity;
+
+  items.forEach((item, i) => {
+    const rect = item.getBoundingClientRect();
+    const center = window.innerWidth / 2;
+    const itemCenter = rect.left + rect.width / 2;
+    const distance = Math.abs(center - itemCenter);
+
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      closestIndex = i;
+    }
+  });
+
+  document.querySelectorAll('.dot').forEach((dot, i) => {
+    dot.classList.toggle('active', i === closestIndex);
+  });
+  caption.textContent = memories[closestIndex].text;
+});
+</script>
+
+</body>
+</html>

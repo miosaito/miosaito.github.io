@@ -1,128 +1,156 @@
-/* ===== mobile-city.css ===== */
-
-/* 1. PC画面全体の設定：中央に配置 */
+/* ===== PCで中央にスマホ表示 ===== */
 html, body {
-    margin: 0;
-    padding: 0;
-    background: #333; /* 背景を暗くしてスマホ枠を際立たせる */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden; /* 画面全体のスクロールを禁止 */
-    font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
 }
 
-/* 2. スマホ外枠：ここを基準にサイズを決める */
+/* ===== スマホ本体 ===== */
 #mobile-container {
-    width: 375px;      /* iPhoneに近い幅 */
-    height: 667px;     /* iPhoneに近い高さ */
-    background: #f4f7f8;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 0 50px rgba(0,0,0,0.5);
-    border-radius: 20px; /* 少し丸みをつけてスマホらしく */
-    overflow: hidden;
+  width: 100%;
+  max-width: 430px;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  box-shadow: 0 0 50px rgba(0,0,0,0.5) !important;
+  overflow-y: hidden;
+  position: relative;
+
 }
 
-/* 3. ヘッダー */
+
+/* ===== ヘッダー ===== */
 .page-header {
-    padding: 30px 10px 10px;
-    text-align: center;
-    flex-shrink: 0;
+  text-align: center;
+  background: none;
+  margin-top: -30px;
 }
+
 .page-header h1 {
-    font-size: 24px !important;
-    margin: 0;
+  font-size: 35px !important;
+  margin: 0;
 }
+
 .page-header p {
-    font-size: 14px !important;
-    opacity: 0.6;
+  font-size: 20px !important;
+  margin-top: 5px;  
+  opacity: 0.8;
 }
 
-/* 4. スクロールエリア：ここが肝心 */
+/* ===== スクロールエリア ===== */
 .scroll-wrapper {
-    flex: 1;           /* 残りの高さをすべて使う */
-    width: 100%;
-    overflow-x: auto;  /* 横スクロール許可 */
-    overflow-y: hidden;
-    display: flex;
-    align-items: center;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
+  flex: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
 }
+
 .scroll-wrapper::-webkit-scrollbar {
-    display: none;     /* スクロールバーを隠す */
+  display: none;
 }
 
+/* ===== 画像トラック ===== */
 .image-track {
-    display: flex;
-    padding: 0 40px;   /* 両端に余白を設けて中央寄せにする */
+  display: flex;
+  padding: 0 40px;
 }
 
-/* 5. 各カード：幅を固定する */
+/* ===== 各カード ===== */
 .memory-item {
-    flex: 0 0 295px;   /* ここでカードの横幅を固定！ */
-    margin: 0 10px;
-    scroll-snap-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  flex: 0 0 calc(430px - 80px);
+  margin: 0 10px;
+  scroll-snap-align: center;
+
+  display: flex;
+  justify-content: center;
+  position: relative;
 }
 
-/* 6. 画像のサイズを強制固定 */
+/* ===== 画像 ===== */
 .memory-item img {
-    width: 100%;       /* 親の295pxに合わせる */
-    height: 295px;     /* 正方形に固定 */
-    object-fit: cover; /* 縦横比を維持して切り抜き */
-    border-radius: 15px;
-    border: 4px solid white;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  width: 70%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+
+  border-radius: 15px;
+  border: 3px solid white;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 165px !important;
 }
 
-/* 7. キャプション */
-#caption {
-    width: 250px;
-    background: white;
-    padding: 15px;
-    border-radius: 12px;
-    text-align: center;
-    font-size: 13px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    margin-top: -20px; /* 画像に少し被せる */
-    z-index: 10;
-}
+/* ===== テキスト（画像の上） ===== */
 
-/* 8. ドット */
+
+
+/* ===== ドット（赤に変更） ===== */
 .indicator-container {
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-    padding: 20px 0;
+  display: flex;
+  gap: 8px;
+  margin-bottom: 30px;
+
+  position: relative;
+  top: -100px !important;
 }
+
 .dot {
-    width: 6px;
-    height: 6px;
-    background: #ccc;
-    border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 0, 0, 0.3); /* ← 赤 */
+  border-radius: 50%;
     transition: 0.3s;
 }
+
 .dot.active {
-    background: #416fa0;
-    transform: scale(1.3);
+  background: rgb(237, 59, 59); /* ← 赤 */
+  transform: scale(1.2);
+  box-shadow: 0 0 8px rgb(237, 59, 59);
 }
 
-/* 9. 戻るボタン */
+/* ===== ボタン（左下に固定） ===== */
 #back-map-btn {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    padding: 10px 18px;
-    font-size: 13px;
-    background: #3d4051;
-    color: white;
-    border-radius: 50px;
-    border: none;
-    cursor: pointer;
+  position: absolute !important;
+  bottom: 20px !important;  /* ← 画面内に収める */
+  left: 20px !important;
+
+  padding: 12px 18px;
+  font-size: 14px;
+
+  background: rgba(61,64,81,0.9);
+  color: white;
+
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  z-index: 999;
+}
+
+#caption {
+  text-align: center;
+  color: black;
+  font-size: 16px;
+  margin-top: -95px;   /* ドットに近づける */
+  padding: 5px 20px;
+
+  width: 80%;
+  max-width: 300px;
+
+  background: white;
+  border-radius: 12px;
+
+  backdrop-filter: blur(5px) !important; /* ちょいオシャレ */
 }
