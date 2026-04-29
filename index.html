@@ -6,6 +6,7 @@
   I have been participating in various projects so far, and I have developed leadership skills as a team leader as well as the ability to think of new business ideas. 
   Going forward, I will continue to focus on my studies and explore new opportunities in the field.
   My future dream is to become an engineer who can work globally and contribute internationally">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Portfolio|Mio Saito | Computer Science Engineering | Violinist | Investigator</title>
   <link rel="stylesheet" href="style.css">
   <style>
@@ -128,7 +129,7 @@
       .hero { height: 70vh; } /* 高さを少し低く */
       .hero h1 { font-size: 2.5rem; }
       .hero p { font-size: 1.2rem; }
-      #about .profile-text p{ text-align: left; font-size: 15px;} 
+      #about .profile-text p{ text-align: left; font-size: 16px;} 
     }
 
     /* =========================================
@@ -163,7 +164,7 @@
     (function() {
       const savedMode = localStorage.getItem('viewMode');
       // スマホモードのメモがある、または初回アクセスで画面幅が狭い場合
-      if (savedMode === 'mobile' || (!savedMode && window.innerWidth <= 768)) {
+      if (savedMode === 'mobile' && window.innerWidth > 768) {
         document.body.classList.add('force-mobile-view');
         
         // Viewport（画面の拡大縮小設定）も最速で切り替える
