@@ -40,6 +40,7 @@ if (containerLarge) {
         { name: "San Francisco", lat: 37.7749, lng: -122.4194, file: "SanFrancisco.html" }
     ];
 
+    
     const mapReal = '//unpkg.com/three-globe/example/img/earth-blue-marble.jpg';
     const mapArt = '//unpkg.com/three-globe/example/img/earth-night.jpg';
     let isRealMap = true; 
